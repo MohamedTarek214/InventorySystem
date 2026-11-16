@@ -1,0 +1,29 @@
+﻿@model RestockViewModel
+@{
+    ViewData["Title"] = "Restock product";
+}
+
+<h1 class="h3 mb-3">Restock: @Model.ProductName</h1>
+
+<p>
+    SKU: <code>@Model.SKU</code><br />
+    Current stock: <strong>@Model.CurrentStock</strong>
+</p>
+
+<form asp-action="Restock" asp-route-id="@Model.Id" method="post" novalidate style="max-width: 320px;">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" type="number" min="1" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add to stock</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,42 @@
+﻿@model IReadOnlyList<ProductViewModel>
+@{
+    ViewData["Title"] = "Low stock";
+}
+
+<h1 class="h3 mb-3">Low stock products</h1>
+<p class="text-muted">Products with fewer than 5 items in stock.</p>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-success">Every product has enough stock.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th class="text-end">Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td><code>@product.SKU</code></td>
+                        <td>@product.Category</td>
+                        <td class="text-end"><span class="badge bg-danger">@product.StockQuantity</span></td>
+                        <td class="text-end">
+                            <a asp-action="Restock" asp-route-id="@product.Id" class="btn btn-sm btn-success">Restock</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
