@@ -1,0 +1,17 @@
+@model ProductFormViewModel
+@{
+    ViewData["Title"] = "Edit product";
+}
+
+<h1 class="h3 mb-3">Edit product</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" novalidate>
+    <partial name="_ProductForm" model="Model" />
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/product-form.js" asp-append-version="true"></script>
+}
